@@ -1,0 +1,44 @@
+<WindowManager>:
+    MainWindow:
+    StatWindow:
+
+<StatWindow>:
+    name: "stat"
+    Button:
+        text: "Wroc na strone glowna"
+        size_hint: (1,.1)
+        pos_hint: {'x':0,'y':0}
+        on_release: app.root.current = "main"
+
+<MainWindow>:
+    name: "main"
+    Label:
+        id: label
+        text: f"Butelki wypite dzisiaj: {app.data[str(app.data['day'])]}"
+        size_hint: (1,.1)
+        pos_hint: {'x':0,'y':.75}
+    Label:
+        id: label1
+        text: f"Wypite butelki: {app.read_from_file()}"
+        size_hint: (1,.1)
+        pos_hint: {'x':0,'y':.65}
+    Label:
+        id: label2
+        text: f"Pozostalo butelek: {app.botles-app.drunk}"
+        size_hint: (1,.1)
+        pos_hint: {'x':0,'y':.55}
+    Button:
+        text: "Dodaj butelke"
+        size_hint: (.4,.1)
+        pos_hint: {'x':.3,'y':.4}
+        on_release: root.add_to_result(self, root.ids.label, root.ids.label1, root.ids.label2)
+    Button:
+        text: "Zresetuj wynik"
+        size_hint: (.4,.1)
+        pos_hint: {'x':.3, 'y':.25}
+        on_release: root.reset_result(self, root.ids.label1, root.ids.label2)
+    Button:
+        text: "Zobacz statystyki"
+        size_hint: (.4,.1)
+        pos_hint: {'x':.3,'y':.1}
+        on_release: app.root.current = "stat"
